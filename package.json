@@ -1,0 +1,22 @@
+{
+  "name": "movie-app",
+  "version": "1.0.0",
+  "description": "Movie App",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "keywords": [
+    "movies"
+  ],
+  "author": "QY",
+  "license": "ISC",
+  "devDependencies": {
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

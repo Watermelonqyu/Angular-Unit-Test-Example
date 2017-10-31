@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="companyApp">
+    <head>
+        <meta name="viewport" content="width=device-width, initial scale=1" />
+        <title>Company App</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <style>
+            .container {
+                max-width: 900px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+        <!-- <script src="/bower_components/angular/angular.js"></script> -->
+        <!-- <script src="/bower_components/angular-resource/angular-resource.js"></script>
+        <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
+        <script src="/bower_components/angular-route/angular-route.js"></script>
+        <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script> -->
+        <script src="//unpkg.com/angular@1.6.5/angular.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.6/angular-resource.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-mocks/1.6.6/angular-mocks.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.js"></script>
+        <script src="market-app/app.js"></script>
+        <script src="omdb/service.js"></script>
+        <script src="market-app/search.controller.js"></script>
+        <script src="market-app/results.controller.js"></script>
+
+        <div class="header">
+            <div class="container">
+                <div class="page-header">
+                    <h1><a href="/">CompanyApp</a></h1>
+                    <p class="lead">
+                        Your Resource for Company Data
+                    </p>
+                </div>
+
+                <br />
+                <div ng-controller="SearchController">
+                    <form class="form-inline-lg" ng-submit="search()">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Company Symbol..." ng-model="query" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="search()">Go!</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="container">
+            <div ui-view>
+
+            </div>
+        </div>
+        <hr />
+        <div class="footer">
+            <div class="container">
+                <p>
+                    from me!
+                </p>
+            </div>
+        </div>
+    </body>
+
+</html>
