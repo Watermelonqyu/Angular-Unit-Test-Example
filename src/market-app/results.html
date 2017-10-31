@@ -2,18 +2,25 @@
     <br />
 
     <ol class="breadcrumb">
-        <li> <a ng-href="#/">Home</a></li>
+        <li> <a ng-href="#/">Home</a></li> /
         <li>Results</li>
     </ol>
 
+    <ul>
+        <li ng-repeat="(key, value) in listData">
+            {{key}}: {{value}}
+        </li>
+    </ul>
+    <!-- {{rc.results}}
     <accordion>
-        <accordion-group ng-repeat="result in results" is-open="result.open">
+        <accordion-group ng-repeat="key as value for (key, value) in rc.results">
             <accordion-heading>
-                {{result.symbol}}
+                nothing?
+                {{key}}: {{value}}
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': result.open,
                                                            'glyphicon-chevron-right': !result.open}"></i>
             </accordion-heading>
         </accordion-group>
-    </accordion>
+    </accordion> -->
 
 </div>

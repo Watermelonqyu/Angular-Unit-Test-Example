@@ -1,4 +1,7 @@
-var companyApp = angular.module('companyApp', ['ui.bootstrap', 'ui.router', 'omdb']);
+var companyApp = angular.module('companyApp', [
+    'ui.bootstrap',
+    'ui.router',                  //state based routing, ngRoute extended
+    'omdb']);
 
 companyApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -8,7 +11,10 @@ companyApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 
         .state('symbols', {
             url: '/symbols',
             templateUrl: 'market-app/results.html',
-            controller: 'ResultsController'
+            controller: 'ResultsController',
+            params: {
+                query: ''
+            }
         });
 
     $locationProvider.html5Mode({
