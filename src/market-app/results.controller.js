@@ -18,7 +18,8 @@ companyApp
             console.log('From ResultsController: ' + $state.params.query);
             omdbApi.search(query)
                 .then(function(data) {
-                    logObj(data, false);
+                    $scope.specData = data;
+                    // logObj(data, false);
                     $scope.listData = data.data.results[0];
                 })
                 .catch(function(err) {

@@ -89,11 +89,13 @@ describe('Results Controller', function() {
     }));
 
     it('should set result status to error', function() {
+
         spyOn(omdbApi, 'search').and.callFake(function() {
             var deferred = $q.defer();
             deferred.reject();
             return deferred.promise;
         });
+
         $controller('ResultsController', {$scope: $scope});
         $rootScope.$apply();
         expect($scope.errorMessage).toBe('Somthing went wrong!');
@@ -105,9 +107,13 @@ describe('Results Controller', function() {
             deferred.resolve(ibmMarketData);
             return deferred.promise;
         });
+
+        // by getting the ResultsController, we did a fake search to get the data
+        // not using jsonp
         $state.params = {query: 'IBM'};
         $controller('ResultsController', {$scope: $scope}, {omdbApi: omdbApi}, {$state: $state});
         $rootScope.$apply();
+        expect($scope.specData).toEqual(ibmMarketData);
         expect(omdbApi.search).toHaveBeenCalledWith('IBM');
     });
 });
