@@ -1,32 +1,56 @@
 describe('Results Controller', function() {
 
-    var results =  {
-        "Search": [
-            {
-                "symbol": "HP",
-                "exchange": "BATS",
-                "name": "Helmerich \u0026 Payne",
-                "dayCode": "P",
-                "serverTimestamp": "2017-10-26T10:30:42-05:00",
-                "mode": "i"
-            },
-            {
-                "symbol":"IBM",
-                "exchange":"BATS",
-                "name":"International Business Machines",
-                "dayCode":"P",
-                "serverTimestamp":"2017-10-26T10:33:30-05:00",
-                "mode":"i"
-            },
-            {
-                "symbol":"DEL",
-                "exchange":"BATS",
-                "name":"Deltic Timber Corp",
-                "dayCode":"P",
-                "serverTimestamp":"2017-10-26T10:35:15-05:00",
-                "mode":"i"
-            }
-        ]
+    var ibmMarketData =
+    {
+        "status": {
+            "code": 200,
+            "message": "Success."
+        },
+        "results": [{
+            "symbol": "IBM",
+            "exchange": "BATS",
+            "name": "International Business Machines",
+            "dayCode": "N",
+            "serverTimestamp": "2017-10-24T09:23:26-05:00",
+            "mode": "i",
+            "lastPrice": 157.41,
+            "tradeTimestamp": "2017-10-24T10:08:22-05:00",
+            "netChange": -2.14,
+            "percentChange": -1.34,
+            "unitCode": "2",
+            "open": 159.65,
+            "high": 159.68,
+            "low": 157.14,
+            "close": 0,
+            "flag": "",
+            "volume": 81965
+        }]
+    };
+
+    var googleMarketData = {
+        "status": {
+            "code": 200,
+            "message": "Success."
+        },
+        "results": [{
+            "symbol": "GOOGL",
+            "exchange": "BATS",
+            "name": "Alphabet Class A",
+            "dayCode": "N",
+            "serverTimestamp": "2017-10-24T09:22:39-05:00",
+            "mode": "i",
+            "lastPrice": 986.8,
+            "tradeTimestamp": "2017-10-24T10:07:38-05:00",
+            "netChange": 1.26,
+            "percentChange": 0.13,
+            "unitCode": "2",
+            "open": 985,
+            "high": 986.84,
+            "low": 977.46,
+            "close": 0,
+            "flag": "",
+            "volume": 13660
+        }]
     };
 
     var $controller;
@@ -63,7 +87,7 @@ describe('Results Controller', function() {
         $rootScope = _$rootScope_;
         omdbApi = _omdbApi_;
     }));
-    
+
     it('should set result status to error', function() {
         spyOn(omdbApi, 'search').and.callFake(function() {
             var deferred = $q.defer();
@@ -78,15 +102,12 @@ describe('Results Controller', function() {
     it('should load search results', function() {
         spyOn(omdbApi, 'search').and.callFake(function() {
             var deferred = $q.defer();
-            deferred.resolve(results);
+            deferred.resolve(ibmMarketData);
             return deferred.promise;
         });
         $state.params = {query: 'IBM'};
         $controller('ResultsController', {$scope: $scope}, {omdbApi: omdbApi}, {$state: $state});
-        dump('**********************************************************   ' +  angular.mock.dump($scope.listData));
-        expect($scope.listData).toBeUndefined();
         $rootScope.$apply();
-        expect($scope.listData).toBeUndefined();
         expect(omdbApi.search).toHaveBeenCalledWith('IBM');
     });
 });
