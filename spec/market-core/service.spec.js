@@ -16,7 +16,7 @@ describe('CompanyCore', function() {
 
     it('should create popular company', function() {
         var expectedData = function(data) {
-            dump(angular.mock.dump(data));
+            // dump(angular.mock.dump(data));
             return true;
         };
 

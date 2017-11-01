@@ -26,32 +26,24 @@ app.factory('omdbApi', function($http, $q) {
             var deferred = $q.defer();
             $http.jsonp(url)
               .then(function success(response) {
-                  //console.log('decrement: ' + postEvent);
                   deferred.resolve(response);
-                  //console.log('resolved promise: ' + postEvent);
+                  //   logObj(response, false);
               }, function error(err, status) {
-                  //console.log('decrement: ' + postEvent);
                   deferred.reject(err);
-                  //console.log('resolved promise error: ' + postEvent);
+                  //   logObj(err, true);
             });
-            // $http({
-            //     method: 'GET',
-            //     url: url,
-            //     headers: {
-            //          'Accept': 'application/json',
-            //          'Content-Type': 'application/json',
-            //          'Access-Control-Allow-Credentials': true,
-            //          'Access-Control-Allow-Origin': '*',
-            //          'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, PATCH, DELETE',
-            //          'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-            //     }
-            // }).then(function success(response) {
-            //     deferred.resolve(response);
-            // }, function error(err) {
-            //     deferred.reject(err);
-            // });
+
             return deferred.promise;
         }
+
+        var logObj = function(obj, isError) {
+            if (isError) {
+                console.error(angular.toJson(obj));
+            }
+            else {
+                console.log(angular.toJson(obj));
+            }
+        };
 
         service.search = function(query) {
             return httpPromise(baseUrl + 'symbols=' + query);

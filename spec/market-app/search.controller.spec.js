@@ -1,35 +1,36 @@
-describe('Search Controller', function() {
-    var $scope;
-    var $location;
-    var $controller;
+(function() {
+    'use strict';
 
-    beforeEach(module('companyApp'));
+    describe('Search Controller', function() {
+        var myScope,
+            ctrl,
+            state,
+            $this;
 
-    beforeEach(inject(function(_$controller_, _$location_) {
-        $location = _$location_;
-        $controller = _$controller_;
-        $scope = {};
-        // var fn = function($scope) {
-        //     $scope.search = function() {
-        //         if ($scope.query) {
-        //             $location.path('/getQuote.json?apikey=aeec6fede61167d3270b9cdc925f746d&').search('symbols', $scope.query);
-        //         }
-        //     };
-        // };
-        //
-        // _$controller_(fn, {$scope: $scope});
-    }));
+        beforeEach(module('companyApp'));
+        beforeEach(module('ui.router'));
 
-    it('should redirect to the query results page for non-empty query', function() {
-        $this = $controller('SearchController', {$scope: $scope}, {$location: $location}, {query: 'IBM'});
-        $this.search();
-        expect($location.url()).toBe('/getQuote.json%3Fapikey=aeec6fede61167d3270b9cdc925f746d&?symbols=IBM');
+        beforeEach(inject(function(_$controller_, _$rootScope_, _$state_) {
+
+            state = _$state_;
+            spyOn(state, 'go');
+            myScope = {};
+            ctrl = _$controller_;
+        }));
+
+        it('should redirect to the query results page for non-empty query', function() {
+            myScope = {query: 'IBM'};
+            $this = ctrl('SearchController', {$scope: myScope}, {$state: state});
+            myScope.search('From Search Controller Spec JS');
+            expect(state.go).toHaveBeenCalledWith('symbols', {query: 'IBM'});
+        });
+
+        it('should not redirect to query results for empty query', function() {
+            myScope = {query: ''};
+            $this = ctrl('SearchController', {$scope: myScope}, {$state: state});
+            myScope.search();
+        });
+
     });
 
-    it('should not redirect to query results for empty query', function() {
-        $this = $controller('SearchController', {$scope: $scope}, {$location: $location}, {query: ''});
-        $this.search();
-        expect($location.url()).toBe('');
-    });
-
-});
+}());
