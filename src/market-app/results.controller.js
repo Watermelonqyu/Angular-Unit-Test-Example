@@ -15,7 +15,7 @@ companyApp
             if ($state.params && $state.params.query) {
                 query = $state.params.query;
             }
-            console.log('From ResultsController: ' + $state.params.query);
+            
             omdbApi.search(query)
                 .then(function(data) {
                     $scope.specData = data;
