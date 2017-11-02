@@ -24,6 +24,8 @@ app.factory('omdbApi', function($http, $q) {
 
         function httpPromise(url) {
             var deferred = $q.defer();
+
+            // using jsonp to avoid CORS issue
             $http.jsonp(url)
               .then(function success(response) {
                   deferred.resolve(response);
