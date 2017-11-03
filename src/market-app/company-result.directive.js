@@ -12,7 +12,7 @@
             template: [
                 '<div class="row">',
                     '<div class="col-sm-4">',
-                        '<span>{{result.serverTimestamp}}</span>',
+                        '<span>{{result.serverTimestamp}} ({{result.serverTimestamp | fromNow}})</span>',
                     '</div>',
                     '<div class="col-sm-8">',
                         '<h3>{{result.name}}</h3>',

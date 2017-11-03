@@ -25,7 +25,7 @@
 
         var expectedHtml = [
                 '<div class="col-sm-4">',
-                    '<span class="ng-binding">2017-10-24T09:23:26-05:00</span>',
+                    '<span class="ng-binding">2017-10-24T09:23:26-05:00 (0 months ago)</span>',
                 '</div>',
                 '<div class="col-sm-8">',
                     '<h3 class="ng-binding">International Business Machines</h3>',
@@ -48,6 +48,7 @@
             element = $compile('<company-result result="result"></company-result>')($rootScope);
             $rootScope.$digest();
             expect(element.html()).toBe(expectedHtml);
+            expect($rootScope.$countWatchers()).toBe(7);
         });
     });
 }());
