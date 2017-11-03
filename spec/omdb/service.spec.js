@@ -93,7 +93,7 @@
             // when get from the url, return hard coded data obj
             $httpBackend.whenJSONP(expectedUrl).respond(500);
             $httpBackend.expectJSONP(expectedUrl).respond(500);
-            omdbApi.find('GOOGL')
+            omdbApi.search('GOOGL')
                 .then(function(data) {
                     response = data;
                 })
@@ -114,7 +114,7 @@
             // when get from the url, return hard coded data obj
             $httpBackend.whenJSONP(expectedUrl).respond(200, ibmMarketData);
             $httpBackend.expectJSONP(expectedUrl).respond(200, ibmMarketData);
-            omdbApi.find('GOOGL')
+            omdbApi.search('GOOGL')
                 .then(function(data) {
                     response = data;
                 });

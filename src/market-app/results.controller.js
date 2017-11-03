@@ -34,6 +34,27 @@
                     });
             }
 
+            $scope.isShow = true;
+
+            $scope.toggleShow = function() {
+                $scope.isShow = !$scope.isShow;
+
+                if ($scope.isShow) {
+                    getInfo($state.params.query);
+                }
+            };
+
+            var getInfo = function(symbol) {
+                omdbApi.search(symbol)
+                    .then(function(data) {
+                        $scope.listData = data.data.results[0];
+                    })
+                    .catch(function(err) {
+                        // logObj(err, true);
+                        $scope.errorMessage = 'Somthing went wrong!';
+                    });
+            };
+
             activate();
         }]);
 

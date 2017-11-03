@@ -32,9 +32,9 @@
         }));
 
         beforeEach(inject(function(_$q_, _omdbApi_) {
-            spyOn(_omdbApi_, 'find').and.callFake(function() {
+            spyOn(_omdbApi_, 'search').and.callFake(function() {
                 var deferred = _$q_.defer();
-                var args = _omdbApi_.find.calls.mostRecent().args[0];
+                var args = _omdbApi_.search.calls.mostRecent().args[0];
                 if (args === 'IBM') {
                     deferred.resolve(results[0]);
                 } else if (args === 'HP') {

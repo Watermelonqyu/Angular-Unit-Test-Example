@@ -10,6 +10,13 @@
         <li ng-repeat="(key, value) in listData">
             {{key}}: {{value}}
         </li>
+
+        <button class="btn btn-primary" ng-click="toggleShow()">Show Detail</button>
+
+        <div ng-show="isShow">
+            <company-result result="listData"></company-result>
+        </div>
+
     </ul>
     <!-- {{rc.results}}
     <accordion>

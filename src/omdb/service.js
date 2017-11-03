@@ -50,10 +50,5 @@ app.factory('omdbApi', function($http, $q) {
         service.search = function(query) {
             return httpPromise(baseUrl + 'symbols=' + query);
         };
-
-        service.find = function(query) {
-            return httpPromise(baseUrl + 'symbols=' + query);
-        };
-
         return service;
     });

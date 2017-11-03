@@ -10,7 +10,7 @@
             var index = 0;
 
             var findCompany = function(symbol) {
-                omdbApi.find(symbol)
+                omdbApi.search(symbol)
                     .then(function(data) {
                         $scope.result = data;
                     });
