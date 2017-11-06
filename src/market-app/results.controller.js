@@ -5,7 +5,7 @@
     var companyApp = angular.module('companyApp');
 
     companyApp
-        .controller('ResultsController', ['$scope', 'omdbApi', '$state', function($scope, omdbApi, $state) {
+        .controller('ResultsController', ['$scope', 'omdbApi', '$state', '$exceptionHandler', function($scope, omdbApi, $state, $exceptionHandler) {
 
             var logObj = function(obj, isError) {
                 if (isError) {
@@ -28,9 +28,10 @@
                         // logObj(data, false);
                         $scope.listData = data.data.results[0];
                     })
-                    .catch(function(err) {
+                    .catch(function(e) {
                         // logObj(err, true);
                         $scope.errorMessage = 'Somthing went wrong!';
+                        $exceptionHandler(e);
                     });
             }
 

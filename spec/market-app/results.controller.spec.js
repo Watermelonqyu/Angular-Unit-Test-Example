@@ -63,9 +63,14 @@
         var $rootScope;
         var $scope;
         var omdbApi;
+        var $exceptionHandler;
 
         beforeEach(module('omdb'));
         beforeEach(module('companyApp'));
+
+        beforeEach(module(function($exceptionHandlerProvider) {
+            $exceptionHandlerProvider.mode('log');
+        }));
 
         beforeEach(angular.mock.module(function ($provide) {
 
@@ -83,11 +88,12 @@
 
         }));
 
-        beforeEach(inject(function(_$controller_, _$q_, _$state_, _$rootScope_, _omdbApi_) {
+        beforeEach(inject(function(_$controller_, _$q_, _$state_, _$rootScope_, _omdbApi_, _$exceptionHandler_) {
             $controller = _$controller_;
             $scope = {};
             $q = _$q_;
             $state = _$state_;
+            $exceptionHandler = _$exceptionHandler_;
             $rootScope = _$rootScope_;
             omdbApi = _omdbApi_;
         }));
@@ -96,13 +102,13 @@
 
             spyOn(omdbApi, 'search').and.callFake(function() {
                 var deferred = $q.defer();
-                deferred.reject();
+                deferred.reject('Something went wrong!');
                 return deferred.promise;
             });
 
             $controller('ResultsController', {$scope: $scope});
             $rootScope.$apply();
-            expect($scope.errorMessage).toBe('Somthing went wrong!');
+            expect($exceptionHandler.errors).toEqual(['Something went wrong!']);
         });
 
         it('should load search results', function() {

@@ -7,6 +7,14 @@
         'omdb',
         'CompanyCore']);
 
+    companyApp.config(['$qProvider', function ($qProvider) {
+        $qProvider.errorOnUnhandledRejections(false);
+    }]);
+
+    companyApp.config(function($logProvider) {
+        $logProvider.debugEnabled(true);
+    });
+
     companyApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 
         $urlRouterProvider.otherwise('/');
