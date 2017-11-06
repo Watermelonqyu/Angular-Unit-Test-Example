@@ -26,16 +26,17 @@
             };
 
             // Get popular companies list
-            PopularCompanies.get()
-                .then(function(data) {
-                // var data = ['IBM', 'HP', 'GOOGL'];
-                results = data;
+            console.log('start popular companies get!!');
+            // PopularCompanies.query(function(data) {
+                var data = ['IBM', 'HP', 'GOOGL'];
+                var results = data;
+                console.log(data + ' after query');
                 findCompany(results[0]);
                 $interval(function() {
                     ++index;
                     findCompany(results[index % results.length]);
                 }, 5000);
-            });
+            // });
             // .catch(function(err) {
             //     console.log(err);
             // });

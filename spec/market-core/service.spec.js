@@ -33,7 +33,7 @@ describe('CompanyCore', function() {
     });
 
     it('should get popular comany by id', function() {
-        $httpBackend.expectGET('popular/GGGGLLLL')
+        $httpBackend.expectGET('https://marketdata.websol.barchart.com/getQuote.jsonp?apikey=aeec6fede61167d3270b9cdc925f746d&symbols=GGGGLLLL')
             .respond(200);
 
         PopularCompanies.get({ companyId: 'GGGGLLLL'});
@@ -42,7 +42,7 @@ describe('CompanyCore', function() {
     });
 
     it('should update popular company', function() {
-        $httpBackend.expectPUT('popular')
+        $httpBackend.expectPUT('https://marketdata.websol.barchart.com/getQuote.jsonp?apikey=aeec6fede61167d3270b9cdc925f746d&symbols=')
             .respond(200);
         var popularCompany = new PopularCompanies({
             companyId: 'GGGGLLLL',
@@ -68,31 +68,32 @@ describe('CompanyCore', function() {
 
 
         var headerData = function(headers) {
-            return headers.authToken === 'teddybear';
+            return headers['Content-Type'] === 'application/json';
         };
 
-        var matchAny = /.*/;
+        var matchAny = 'https://marketdata.websol.barchart.com/getQuote.jsonp?apikey=aeec6fede61167d3270b9cdc925f746d&symbols=';
+        var nothing = '';
 
-        $httpBackend.whenGET(matchAny, headerData)
+        var popularCompany = new PopularCompanies({
+            companyId: 'GGGGLLLL',
+            description: 'Another Great Company!'
+        });
+
+        $httpBackend.whenGET(matchAny)
             .respond(200);
 
-        $httpBackend.expectPOST(matchAny, matchAny, headerData)
+        $httpBackend.expectPOST(matchAny)
             .respond(200);
 
-        $httpBackend.expectPUT(matchAny, matchAny, headerData)
+        $httpBackend.expectPUT(matchAny)
             .respond(200);
 
-        $httpBackend.expectDELETE(matchAny, headerData)
+        $httpBackend.expectDELETE(matchAny)
             .respond(200);
 
-        var popularCompany = { id: 'QQQQWWWW', description: 'The company is great!'};
-
-        PopularCompanies.query();
-        PopularCompanies.get({id: 'QQQQWWWWW'});
-
-        new PopularCompanies(popularCompany).$save();
-        new PopularCompanies(popularCompany).$update();
-        new PopularCompanies(popularCompany).$remove();
+        popularCompany.$save();
+        popularCompany.$update();
+        popularCompany.$remove();
 
         expect($httpBackend.flush).not.toThrow();
     });
